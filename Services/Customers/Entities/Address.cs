@@ -1,5 +1,5 @@
-using Common.Abstractions.Domain;
-using Common.ValueObjects;
+using Common.Abstractions.Entities;
+using Common.Types;
 
 namespace Customers.Entities;
 
