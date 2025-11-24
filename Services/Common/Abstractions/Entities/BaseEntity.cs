@@ -1,4 +1,6 @@
-namespace Common.Abstractions.Domain;
+using Common.Abstractions.Events;
+
+namespace Common.Abstractions.Entities;
 
 public abstract class BaseEntity<TId>
 {

@@ -1,4 +1,6 @@
-namespace Common.Abstractions.Domain;
+using Common.Abstractions.Entities;
+
+namespace Common.Abstractions.Persistence;
 
 public interface IRepository<T>
     where T : IAggregateRoot
