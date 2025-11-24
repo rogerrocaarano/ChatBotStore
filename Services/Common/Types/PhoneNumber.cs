@@ -1,5 +1,5 @@
-using Common.Abstractions.Domain;
+using Common.Abstractions.Entities;
 
-namespace Common.ValueObjects;
+namespace Common.Types;
 
 public record PhoneNumber(string CountryCode, string Number) : IValueObject;

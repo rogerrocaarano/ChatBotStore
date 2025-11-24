@@ -1,6 +1,6 @@
-using Common.Abstractions.Domain;
+using Common.Abstractions.Entities;
 
-namespace Common.ValueObjects;
+namespace Common.Types;
 
 public record LocationDetails(
     string? Street,
