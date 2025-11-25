@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
 using RestSharp.Serializers.Json;
 
-namespace Telegram;
+namespace TelegramBot;
 
-public static class TelegramModule
+public static class TelegramBotModule
 {
     private static RestClient BuildTelegramRestClient(string token)
     {
@@ -47,7 +47,7 @@ public static class TelegramModule
         services.AddSingleton<ITelegramPort>(sp =>
         {
             var restClient = BuildTelegramRestClient(botToken);
-            return new TelegramAdapter(restClient);
+            return new TelegramBotAdapter(restClient);
         });
 
 
