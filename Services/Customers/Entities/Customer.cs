@@ -33,6 +33,10 @@ public class Customer : BaseEntity<Guid>, IAggregateRoot
 
     public static Customer Create(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name required");
+        }
         return new Customer(
             id: Guid.NewGuid(),
             name: name,
