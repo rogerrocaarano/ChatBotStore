@@ -44,10 +44,10 @@ public static class TelegramBotModule
             throw new InvalidOperationException("Telegram:Token is not configured.");
         }
 
-        services.AddSingleton<ITelegramPort>(sp =>
+        services.AddSingleton<ITelegramBotPort>(sp =>
         {
             var restClient = BuildTelegramRestClient(botToken);
-            return new TelegramBotAdapter(restClient);
+            return new TelegramBotBotAdapter(restClient);
         });
 
 
