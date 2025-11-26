@@ -15,11 +15,8 @@ public class Product : BaseEntity<Guid>, IAggregateRoot
     private Product() { } // For ORMs
 #pragma warning restore CS8618
 
-    private Product(
-        Guid id,
-        Guid catalogId,
-        string name
-    ) : base(id)
+    private Product(Guid id, Guid catalogId, string name)
+        : base(id)
     {
         CatalogId = catalogId;
         Name = name;
@@ -31,11 +28,7 @@ public class Product : BaseEntity<Guid>, IAggregateRoot
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Product name is required.");
 
-        return new Product(
-            id: Guid.NewGuid(),
-            catalogId: catalogId,
-            name: name
-        );
+        return new Product(id: Guid.NewGuid(), catalogId: catalogId, name: name);
     }
 
     public Product WithDescription(string description)
@@ -49,9 +42,7 @@ public class Product : BaseEntity<Guid>, IAggregateRoot
         // La regla de negocio se mantiene aquí
         if (price.Currency != catalogCurrency)
         {
-            throw new InvalidOperationException(
-                $"Product currency ({price.Currency.Code}) must match Catalog currency ({catalogCurrency.Code})."
-            );
+            throw new InvalidOperationException($"Product currency must match Catalog currency.");
         }
 
         Apply(() => Price = price);
