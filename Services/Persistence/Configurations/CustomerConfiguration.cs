@@ -40,12 +40,26 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
                     {
                         location
                             .Property(prop => prop.Latitude)
-                            .HasColumnName("Latitude")
+                            .HasColumnName("AddressLatitude")
                             .IsRequired();
                         location
                             .Property(prop => prop.Longitude)
-                            .HasColumnName("Longitude")
+                            .HasColumnName("AddressLongitude")
                             .IsRequired();
+                    }
+                );
+                address.OwnsOne(
+                    address => address.Details,
+                    details =>
+                    {
+                        details.Property(prop => prop.Street).HasColumnName("AddressStreet");
+                        details.Property(prop => prop.Avenue).HasColumnName("AddressAvenue");
+                        details
+                            .Property(prop => prop.BuildingName)
+                            .HasColumnName("AddressBuildingName");
+                        details
+                            .Property(prop => prop.DoorNumber)
+                            .HasColumnName("AddressDoorNumber");
                     }
                 );
             }
