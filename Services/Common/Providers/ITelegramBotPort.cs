@@ -5,6 +5,7 @@ namespace Common.Providers;
 
 public interface ITelegramBotPort
 {
-    Task SendMessageAsync(Telegram to, IncomingChatMessage message);
-    IncomingChatMessage? ReceiveMessageAsync(JsonObject update);
+    Task SendMessageAsync(Telegram to, string message);
+    Task ReplyToMessageAsync(IncomingChatMessage update);
+    Task<IncomingChatMessage?> IncommingMessageAsync(JsonObject update);
 }
