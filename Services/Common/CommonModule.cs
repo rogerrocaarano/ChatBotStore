@@ -1,4 +1,5 @@
 using System.Reflection;
+using Common.Extensions;
 using LiteBus.Commands;
 using LiteBus.Events;
 using LiteBus.Extensions.Microsoft.DependencyInjection;
@@ -9,20 +10,16 @@ namespace Common;
 
 public static class CommonModule
 {
-    public static IServiceCollection AddApplication(
+    public static IServiceCollection RegisterFeatureHandlers(
         this IServiceCollection services,
         params Assembly[] assemblies
     )
     {
-        // Register LiteBus modules
         services.AddLiteBus(liteBus =>
         {
-            foreach (var assembly in assemblies)
-            {
-                liteBus.AddCommandModule(module => module.RegisterFromAssembly(assembly));
-                liteBus.AddEventModule(module => module.RegisterFromAssembly(assembly));
-                liteBus.AddQueryModule(module => module.RegisterFromAssembly(assembly));
-            }
+            liteBus.AddCommandModule(m => assemblies.Register(a => m.RegisterFromAssembly(a)));
+            liteBus.AddEventModule(m => assemblies.Register(a => m.RegisterFromAssembly(a)));
+            liteBus.AddQueryModule(m => assemblies.Register(a => m.RegisterFromAssembly(a)));
         });
 
         return services;
