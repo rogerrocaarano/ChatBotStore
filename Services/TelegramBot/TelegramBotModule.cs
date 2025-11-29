@@ -47,9 +47,8 @@ public static class TelegramBotModule
         services.AddSingleton<ITelegramBotPort>(sp =>
         {
             var restClient = BuildTelegramRestClient(botToken);
-            return new TelegramBotBotAdapter(restClient);
+            return new TelegramBotAdapter(restClient);
         });
-
 
         return services;
     }
