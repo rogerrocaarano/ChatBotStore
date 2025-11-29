@@ -10,6 +10,13 @@ namespace TelegramBot;
 
 public static class TelegramBotModule
 {
+    internal static readonly JsonSerializerOptions SerializerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    };
+
     private static RestClient BuildTelegramRestClient(string token)
     {
         var options = new RestClientOptions
@@ -17,17 +24,10 @@ public static class TelegramBotModule
             BaseUrl = new Uri($"https://api.telegram.org/bot{token}/"),
         };
 
-        var serializer = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        };
-
         var client = new RestClient(
             options,
             configureSerialization: s =>
-                s.UseSerializer(() => new SystemTextJsonSerializer(serializer))
+                s.UseSerializer(() => new SystemTextJsonSerializer(SerializerOptions))
         );
 
         return client;
